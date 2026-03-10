@@ -15,7 +15,6 @@
 bool IsRunAsAdmin();
 bool RestartAsAdmin();
 bool EnsureAdminPrivileges();
-bool ExecuteCommand(const std::wstring& command, bool waitForCompletion = true, bool showWindow = false);
 void ModifyMainRegistryKeys();
 void ModifyProfileImagePaths();
 
@@ -35,10 +34,10 @@ int main(){
     printf("请选择功能:\r\n1.复制Users用户文件夹到D盘并修改注册表\r\n2.删除旧Users文件夹并创建符号链接\r\n");
     scanf("%d",&index);
     if(index == 1) {
-        ExecuteCommand(L"robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ", 1, 0);
+        system("robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ");
         ModifyMainRegistryKeys();
         ModifyProfileImagePaths();
-        ExecuteCommand(L"logoff", 1, 0);
+        system("logoff");
     }
     if(index == 2) {
         system("rmdir /S /Q \"C:\\Users\"");
@@ -143,50 +142,6 @@ bool EnsureAdminPrivileges() {
     }
     
     return true;  // 已有管理员权限或已重启
-}
-
-// 注意：这里没有默认参数！
-bool ExecuteCommand(const std::wstring& command, bool waitForCompletion, bool showWindow) {
-    STARTUPINFOW si = { sizeof(si) };
-    PROCESS_INFORMATION pi = { 0 };
-    
-    // 设置窗口显示状态
-    si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = showWindow ? SW_SHOW : SW_HIDE;
-    
-    // 复制命令字符串（CreateProcessW需要可修改的缓冲区）
-    wchar_t* cmdLine = _wcsdup(command.c_str());
-    
-    if (!CreateProcessW(
-        NULL,               // 应用程序名
-        cmdLine,            // 命令行
-        NULL,              // 进程安全属性
-        NULL,              // 线程安全属性
-        FALSE,             // 不继承句柄
-        0,                 // 创建标志
-        NULL,              // 环境变量
-        NULL,              // 当前目录
-        &si,               // STARTUPINFO
-        &pi                // PROCESS_INFORMATION
-    )) {
-        std::wcerr << L"执行命令失败，错误码: " << GetLastError() << std::endl;
-        free(cmdLine);
-        return false;
-    }
-    
-    free(cmdLine);
-    
-    if (waitForCompletion) {
-        WaitForSingleObject(pi.hProcess, INFINITE);
-    }
-    
-    DWORD exitCode = 0;
-    GetExitCodeProcess(pi.hProcess, &exitCode);
-    
-    CloseHandle(pi.hProcess);
-    CloseHandle(pi.hThread);
-    
-    return exitCode == 0;  // 返回命令执行是否成功
 }
 
 // 修改主注册表路径的键值

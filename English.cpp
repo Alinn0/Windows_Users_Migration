@@ -15,7 +15,6 @@
 bool IsRunAsAdmin();
 bool RestartAsAdmin();
 bool EnsureAdminPrivileges();
-bool ExecuteCommand(const std::wstring& command, bool waitForCompletion = true, bool showWindow = false);
 void ModifyMainRegistryKeys();
 void ModifyProfileImagePaths();
 
@@ -35,10 +34,10 @@ int main(){
     printf("Please select function:\r\n1. Copy Users folder to D drive and modify registry\r\n2. Delete old Users folder and create symbolic link\r\n");
     scanf("%d",&index);
     if(index == 1) {
-        ExecuteCommand(L"robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ", 1, 0);
+        system("robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ");
         ModifyMainRegistryKeys();
         ModifyProfileImagePaths();
-        ExecuteCommand(L"logoff", 1, 0);
+        system("logoff");
     }
     if(index == 2) {
         system("rmdir /S /Q \"C:\\Users\"");
@@ -143,50 +142,6 @@ bool EnsureAdminPrivileges() {
     }
     
     return true;  // Already has administrator privileges or restarted
-}
-
-// Note: There are no default parameters here!
-bool ExecuteCommand(const std::wstring& command, bool waitForCompletion, bool showWindow) {
-    STARTUPINFOW si = { sizeof(si) };
-    PROCESS_INFORMATION pi = { 0 };
-    
-    // Set window display state
-    si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = showWindow ? SW_SHOW : SW_HIDE;
-    
-    // Copy command string (CreateProcessW requires modifiable buffer)
-    wchar_t* cmdLine = _wcsdup(command.c_str());
-    
-    if (!CreateProcessW(
-        NULL,               // Application name
-        cmdLine,            // Command line
-        NULL,              // Process security attributes
-        NULL,              // Thread security attributes
-        FALSE,             // Do not inherit handles
-        0,                 // Creation flags
-        NULL,              // Environment variables
-        NULL,              // Current directory
-        &si,               // STARTUPINFO
-        &pi                // PROCESS_INFORMATION
-    )) {
-        std::wcerr << L"Failed to execute command, error code: " << GetLastError() << std::endl;
-        free(cmdLine);
-        return false;
-    }
-    
-    free(cmdLine);
-    
-    if (waitForCompletion) {
-        WaitForSingleObject(pi.hProcess, INFINITE);
-    }
-    
-    DWORD exitCode = 0;
-    GetExitCodeProcess(pi.hProcess, &exitCode);
-    
-    CloseHandle(pi.hProcess);
-    CloseHandle(pi.hThread);
-    
-    return exitCode == 0;  // Return whether command execution succeeded
 }
 
 // Modify main registry path key values
