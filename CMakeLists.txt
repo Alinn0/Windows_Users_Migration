@@ -35,3 +35,6 @@ target_link_libraries(Migration
 set_target_properties(Migration PROPERTIES
     LINK_FLAGS "-static"
 )
+
+set_target_properties(Migration PROPERTIES
+    COMPILE_FLAGS "-finput-charset=UTF-8 -fexec-charset=UTF-8")

@@ -1,22 +1,19 @@
-// 确保使用Unicode
-#ifndef UNICODE
-#define UNICODE
-#endif
-#ifndef _UNICODE
-#define _UNICODE
-#endif
-
 #include"stdio.h"
 #include"windows.h"
 #include <shellapi.h>
 #include <string>
 #include <iostream>
+#include <fstream> 
 
 bool IsRunAsAdmin();
 bool RestartAsAdmin();
 bool EnsureAdminPrivileges();
 void ModifyMainRegistryKeys();
 void ModifyProfileImagePaths();
+bool Check_File_Exists(std::string index);
+bool Create_File(std::string Name);
+bool Delete_File(std::string Name);
+
 
 int main(){
     //申请管理员权限
@@ -24,25 +21,36 @@ int main(){
         // 提权失败，处理错误或退出
         return 1;
     }
-    int index=0;
+    char Word=0;
     printf("欢迎使用Users用户文件夹迁移工具\r\n");
-    printf("***********************************************必须先选择第一步，再选择第二步******************************************************\r\n");
+    printf("Welcome to Users folder migration tool\r\n");
+    printf("*****************第一次打开会自动修改注册表然后注销,注销之后再次打开软件会自动创建符号链接*****************\r\n");
+    printf("*****************First time opening will automatically modify the registry and then log off, after logging off, open the software again to automatically create symbolic links*****************\r\n");
     printf("此软件功能:\r\n1.复制Users用户文件夹到D盘\r\n2.修改注册表路径使系统访问用户路径指向D盘\r\n3.设置C:Users->D:Users的符号链接\r\n");
+    printf("This software's functions:\r\n1.Copy Users folder to D drive\r\n2.Modify registry path to make system access user path point to D drive\r\n3.Set up symbolic link C:Users->D:Users\r\n");
     printf("本软件访问的修改的注册表路径：\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList\\\r\n");
+    printf("The registry path accessed and modified by this software:\r\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList\\\r\n");
     printf("本软件将修改此路径下的这些条目:\r\n1.键值:Default   数据修改为:D:\\Users\\Default\r\n2.键值:ProfilesDirectory   数据修改为:D:\\Users\r\n3.键值:Public   数据修改为:D:\\Users\\Public\r\n");
+    printf("This software will modify the following entries under this path:\r\n1.Key:Default   Data modified to: D:\\Users\\Default\r\n2.Key:ProfilesDirectory   Data modified to: D:\\Users\r\n3.Key:Public   Data modified to: D:\\Users\\Public\r\n");
     printf("修改下级目录开头为S-1-5-21的文件夹内的键值为ProfileImagePath的数据字段的为盘符为D盘\r\n"); 
-    printf("请选择功能:\r\n1.复制Users用户文件夹到D盘并修改注册表\r\n2.删除旧Users文件夹并创建符号链接\r\n");
-    scanf("%d",&index);
-    if(index == 1) {
+    printf("Modify the data field of the key named ProfileImagePath in the subfolders starting with S-1-5-21 to change the drive letter to D\r\n");
+    printf("是否确认修改？  Y/N"    );
+    printf("\nConfirm the modification?  Y/N   ");
+    scanf("%c",&Word);
+    if(Word!='y'&&Word!='Y') return 0;
+    if(!Check_File_Exists("index")) {
         system("robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ");
         ModifyMainRegistryKeys();
         ModifyProfileImagePaths();
+        Create_File("index");
         system("logoff");
     }
-    if(index == 2) {
+    else {
         system("rmdir /S /Q \"C:\\Users\"");
         system("mklink /D \"C:\\Users\" \"D:\\Users\"");
+        Delete_File("index");
         printf("操作完成，按任意键退出...");
+        printf("\nOperation completed, press any key to exit...");
         system("pause");
     }
     
@@ -111,7 +119,7 @@ bool RestartAsAdmin() {
     DWORD err = GetLastError();
     if (err == ERROR_CANCELLED) {
         // 用户取消了UAC提示
-        MessageBoxW(NULL, L"程序需要管理员权限才能正常运行。", L"权限不足", MB_ICONWARNING | MB_OK);
+        MessageBoxW(NULL, L"程序需要管理员权限才能正常运行。\nThe program requires administrator privileges to run properly.", L"权限不足\nInsufficient Privileges", MB_ICONWARNING | MB_OK);
     }
     
     return false;
@@ -200,4 +208,69 @@ void ModifyProfileImagePaths() {
         
         RegCloseKey(hKey);
     }
+}
+
+
+bool Check_File_Exists(std::string index) {
+    char exePath[MAX_PATH] = {0};
+    
+    // 获取当前可执行文件路径
+    GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+    
+    // 去除文件名，只保留目录
+    std::string dirPath = exePath;
+    size_t pos = dirPath.find_last_of("\\/");
+    if (pos != std::string::npos) {
+        dirPath = dirPath.substr(0, pos);
+    }
+    
+    // 拼接目标文件路径
+    std::string targetPath = dirPath + "\\"+ index;
+    
+    // 检查文件是否存在
+    DWORD fileAttrib = GetFileAttributesA(targetPath.c_str());
+    return (fileAttrib != INVALID_FILE_ATTRIBUTES && 
+            !(fileAttrib & FILE_ATTRIBUTE_DIRECTORY));
+}
+
+bool Create_File(std::string Name) {
+    char exePath[MAX_PATH] = {0};
+    
+    // 获取当前可执行文件路径
+    GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+    
+    // 去除文件名，只保留目录
+    std::string dirPath = exePath;
+    size_t pos = dirPath.find_last_of("\\/");
+    if (pos != std::string::npos) {
+        dirPath = dirPath.substr(0, pos);
+    }
+    
+    // 拼接目标文件路径
+    std::string targetPath = dirPath + "\\" + Name;  
+    
+    // 创建文件
+    std::ofstream file(targetPath);
+    
+    // 返回是否创建成功
+    return file.is_open();  
+}
+
+bool Delete_File(std::string Name) {
+    char exePath[MAX_PATH] = {0};
+    
+    // 获取当前可执行文件路径
+    GetModuleFileNameA(nullptr, exePath, MAX_PATH);
+    
+    // 去除文件名，只保留目录
+    std::string dirPath = exePath;
+    size_t pos = dirPath.find_last_of("\\/");
+    if (pos != std::string::npos) {
+        dirPath = dirPath.substr(0, pos);
+    }
+    
+    // 拼接目标文件路径
+    std::string targetPath = dirPath + "\\" + Name;  
+     
+    return DeleteFileA(targetPath.c_str()) != 0;
 }

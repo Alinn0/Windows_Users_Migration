@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20260329-0218-Experimental"
+	Name="DESKTOP-6D23M6T"
+	Generator="ctest-4.3.0-rc3"
+	CompilerName="D:/SoftWare/C/MSYS2/ucrt64/bin/g++.exe"
+	CompilerVersion="15.2.0"
+	OSName="Windows"
+	Hostname="DESKTOP-6D23M6T"
+	OSRelease="10.0.19045"
+	OSVersion="Windows 10"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="7"
+	ModelName=""
+	ProcessorCacheSize="-1"
+	NumberOfLogicalCPU="20"
+	NumberOfPhysicalCPU="14"
+	TotalVirtualMemory="1536"
+	TotalPhysicalMemory="24367"
+	LogicalProcessorsPerPhysical="1"
+	ProcessorClockFrequency="2600.000000"
+	>
+	<Testing>
+		<StartDateTime>Mar 29 11:21 中国标准时间</StartDateTime>
+		<StartTestTime>1774754511</StartTestTime>
+		<TestList/>
+		<EndDateTime>Mar 29 11:21 中国标准时间</EndDateTime>
+		<EndTestTime>1774754511</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
