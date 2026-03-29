@@ -13,7 +13,7 @@ void ModifyProfileImagePaths();
 bool Check_File_Exists(std::string index);
 bool Create_File(std::string Name);
 bool Delete_File(std::string Name);
-
+bool checkDriveExists(int driveNum);
 
 int main(){
     //申请管理员权限
@@ -39,6 +39,11 @@ int main(){
     scanf("%c",&Word);
     if(Word!='y'&&Word!='Y') return 0;
     if(!Check_File_Exists("index")) {
+        if(!checkDriveExists(2)){
+            printf("没有D盘\r\n");
+            printf("No D drivern\r\n");
+            return 0;
+        }
         system("robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ");
         ModifyMainRegistryKeys();
         ModifyProfileImagePaths();
@@ -273,4 +278,30 @@ bool Delete_File(std::string Name) {
     std::string targetPath = dirPath + "\\" + Name;  
      
     return DeleteFileA(targetPath.c_str()) != 0;
+}
+
+/**
+ * 检测指定序号的硬盘驱动器是否存在
+ * @param driveNum 驱动器序号：1对应C盘，2对应D盘，...，9对应K盘
+ * @return 如果驱动器存在返回true，否则返回false
+ */
+bool checkDriveExists(int driveNum) {
+    // 参数有效性检查
+    if (driveNum < 1 || driveNum > 9) {
+        return false;
+    } 
+    // 获取所有逻辑驱动器
+    DWORD drives = GetLogicalDrives();
+    if (drives == 0) {
+        printf("错误：无法获取驱动器列表");
+         printf("Error: Unable to retrieve the drive list");
+        return false;
+    }
+    
+    // 计算对应驱动器的位掩码
+    // A盘=0, B=1, C=2, D=3,... 所以C盘=2，对应输入1
+    int bitPosition = driveNum + 1;  // 1->C(2), 2->D(3), ..., 9->K(10)
+    
+    // 检查该位是否为1
+    return (drives & (1 << bitPosition)) != 0;
 }
