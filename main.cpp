@@ -22,6 +22,7 @@ int main(){
         return 1;
     }
     char Word=0;
+    SetConsoleOutputCP(CP_UTF8);SetConsoleCP(CP_UTF8);
     printf("欢迎使用Users用户文件夹迁移工具\r\n");
     printf("Welcome to Users folder migration tool\r\n");
     printf("*****************第一次打开会自动修改注册表然后注销,注销之后再次打开软件会自动创建符号链接*****************\r\n");
