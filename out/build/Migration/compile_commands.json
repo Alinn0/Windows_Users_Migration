@@ -1,0 +1,8 @@
+[
+{
+  "directory": "D:/Study/C/Migration/out/build/Migration",
+  "command": "D:\\SoftWare\\CCode\\MSYS2\\ucrt64\\bin\\g++.exe   -g -finput-charset=UTF-8 -fexec-charset=UTF-8 -o CMakeFiles\\Migration.dir\\main.cpp.obj -c D:\\Study\\C\\Migration\\main.cpp",
+  "file": "D:/Study/C/Migration/main.cpp",
+  "output": "CMakeFiles/Migration.dir/main.cpp.obj"
+}
+]

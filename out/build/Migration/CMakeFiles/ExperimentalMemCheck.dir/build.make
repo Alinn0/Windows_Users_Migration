@@ -43,10 +43,10 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = D:\SoftWare\Cmake\bin\cmake.exe
+CMAKE_COMMAND = D:\SoftWare\CMake\bin\cmake.exe
 
 # The command to remove a file.
-RM = D:\SoftWare\Cmake\bin\cmake.exe -E rm -f
+RM = D:\SoftWare\CMake\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -66,7 +66,7 @@ include CMakeFiles/ExperimentalMemCheck.dir/compiler_depend.make
 include CMakeFiles/ExperimentalMemCheck.dir/progress.make
 
 CMakeFiles/ExperimentalMemCheck:
-	D:\SoftWare\Cmake\bin\ctest.exe -DMODEL=Experimental -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V
+	D:\SoftWare\CMake\bin\ctest.exe -DMODEL=Experimental -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V
 
 CMakeFiles/ExperimentalMemCheck.dir/codegen:
 .PHONY : CMakeFiles/ExperimentalMemCheck.dir/codegen

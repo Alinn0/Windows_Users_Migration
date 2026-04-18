@@ -35,16 +35,16 @@ int main(){
     printf("This software will modify the following entries under this path:\r\n1.Key:Default   Data modified to: D:\\Users\\Default\r\n2.Key:ProfilesDirectory   Data modified to: D:\\Users\r\n3.Key:Public   Data modified to: D:\\Users\\Public\r\n");
     printf("修改下级目录开头为S-1-5-21的文件夹内的键值为ProfileImagePath的数据字段的为盘符为D盘\r\n"); 
     printf("Modify the data field of the key named ProfileImagePath in the subfolders starting with S-1-5-21 to change the drive letter to D\r\n");
-    printf("是否确认修改？  Y/N"    );
-    printf("\nConfirm the modification?  Y/N   ");
-    scanf("%c",&Word);
-    if(Word!='y'&&Word!='Y') return 0;
     if(!Check_File_Exists("index")) {
         if(!checkDriveExists(2)){
             printf("没有D盘\r\n");
             printf("No D drivern\r\n");
             return 0;
         }
+        printf("是否确认修改？  Y/N"    );
+        printf("\nConfirm the modification?  Y/N   ");
+        scanf("%c",&Word);
+        if(Word!='y'&&Word!='Y') return 0;
         system("robocopy \"C:\\Users\" \"D:\\Users\" /E /COPYALL /XJ");
         ModifyMainRegistryKeys();
         ModifyProfileImagePaths();

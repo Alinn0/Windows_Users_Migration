@@ -2,14 +2,14 @@
 # If you choose not to use CMake, this file may be hand configured, by
 # filling in the required variables.
 
-cmake_minimum_required(VERSION 4.3.0-rc3)
+cmake_minimum_required(VERSION 4.3.1)
 
 # CTest Start Step
 set(CTEST_SOURCE_DIRECTORY "D:/Study/C/Migration")
 set(CTEST_BINARY_DIRECTORY "D:/Study/C/Migration/out/build/Migration")
 
 # CTest Update Step
-set(CTEST_UPDATE_COMMAND "D:/SoftWare/Git/cmd/git.exe")
+set(CTEST_UPDATE_COMMAND "D:/SoftWare/CCode/Git/bin/git.exe")
 set(CTEST_UPDATE_OPTIONS "")
 set(CTEST_UPDATE_VERSION_ONLY "")
 set(CTEST_NIGHTLY_START_TIME "00:00:00 EDT")
@@ -24,7 +24,7 @@ set(CTEST_SVN_OPTIONS "")
 set(CTEST_SVN_UPDATE_OPTIONS "")
 
 # Git options
-set(CTEST_GIT_COMMAND "D:/SoftWare/Git/cmd/git.exe")
+set(CTEST_GIT_COMMAND "D:/SoftWare/CCode/Git/bin/git.exe")
 set(CTEST_GIT_INIT_SUBMODULES "")
 set(CTEST_GIT_UPDATE_CUSTOM "")
 set(CTEST_GIT_UPDATE_OPTIONS "")
@@ -50,7 +50,7 @@ set(CTEST_TEST_LOAD "")
 set(CTEST_TEST_TIMEOUT "1500")
 
 # CTest Coverage Step
-set(CTEST_COVERAGE_COMMAND "D:/SoftWare/C/MSYS2/ucrt64/bin/gcov.exe")
+set(CTEST_COVERAGE_COMMAND "D:/SoftWare/CCode/MSYS2/ucrt64/bin/gcov.exe")
 set(CTEST_COVERAGE_EXTRA_FLAGS "-l")
 
 # CTest MemCheck Step

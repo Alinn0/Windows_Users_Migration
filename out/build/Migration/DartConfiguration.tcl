@@ -27,8 +27,8 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "D:/SoftWare/Cmake/bin/cmake.exe" "D:/Study/C/Migration"
-MakeCommand: D:/SoftWare/Cmake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "D:/SoftWare/CMake/bin/cmake.exe" "D:/Study/C/Migration"
+MakeCommand: D:/SoftWare/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -45,7 +45,7 @@ SVNOptions:
 SVNUpdateOptions: 
 
 # Git options
-GITCommand: D:/SoftWare/Git/cmd/git.exe
+GITCommand: D:/SoftWare/CCode/Git/bin/git.exe
 GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
@@ -58,12 +58,12 @@ P4UpdateOptions:
 P4UpdateCustom: 
 
 # Generic update command
-UpdateCommand: D:/SoftWare/Git/cmd/git.exe
+UpdateCommand: D:/SoftWare/CCode/Git/bin/git.exe
 UpdateOptions: 
 UpdateType: git
 
 # Compiler info
-Compiler: D:/SoftWare/C/MSYS2/ucrt64/bin/g++.exe
+Compiler: D:/SoftWare/CCode/MSYS2/ucrt64/bin/g++.exe
 CompilerVersion: 15.2.0
 
 # Dynamic analysis (MemCheck)
@@ -81,7 +81,7 @@ MemoryCheckCommandOptions:
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: D:/SoftWare/C/MSYS2/ucrt64/bin/gcov.exe
+CoverageCommand: D:/SoftWare/CCode/MSYS2/ucrt64/bin/gcov.exe
 CoverageExtraFlags: -l
 
 # Testing options

@@ -1,3 +1,3 @@
-D:\SoftWare\Cmake\bin\cmake.exe -E rm -f CMakeFiles\Migration.dir/objects.a
-D:\SoftWare\C\MSYS2\ucrt64\bin\ar.exe qc CMakeFiles\Migration.dir/objects.a @CMakeFiles\Migration.dir\objects1.rsp
-D:\SoftWare\C\MSYS2\ucrt64\bin\g++.exe -g -static -Wl,--whole-archive CMakeFiles\Migration.dir/objects.a -Wl,--no-whole-archive -o Migration.exe -Wl,--out-implib,libMigration.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Migration.dir\linkLibs.rsp
+D:\SoftWare\CMake\bin\cmake.exe -E rm -f CMakeFiles\Migration.dir/objects.a
+D:\SoftWare\CCode\MSYS2\ucrt64\bin\ar.exe qc CMakeFiles\Migration.dir/objects.a @CMakeFiles\Migration.dir\objects1.rsp
+D:\SoftWare\CCode\MSYS2\ucrt64\bin\g++.exe -g -static -Wl,--whole-archive CMakeFiles\Migration.dir/objects.a -Wl,--no-whole-archive -o Migration.exe -Wl,--out-implib,libMigration.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Migration.dir\linkLibs.rsp

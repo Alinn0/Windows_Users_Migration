@@ -43,10 +43,10 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = D:\SoftWare\Cmake\bin\cmake.exe
+CMAKE_COMMAND = D:\SoftWare\CMake\bin\cmake.exe
 
 # The command to remove a file.
-RM = D:\SoftWare\Cmake\bin\cmake.exe -E rm -f
+RM = D:\SoftWare\CMake\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -66,7 +66,7 @@ include CMakeFiles/NightlySubmit.dir/compiler_depend.make
 include CMakeFiles/NightlySubmit.dir/progress.make
 
 CMakeFiles/NightlySubmit:
-	D:\SoftWare\Cmake\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V
+	D:\SoftWare\CMake\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V
 
 CMakeFiles/NightlySubmit.dir/codegen:
 .PHONY : CMakeFiles/NightlySubmit.dir/codegen

@@ -7,10 +7,10 @@ set(APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/appicon.ico")
 if(WIN32)
     # 创建临时的 .rc 文件内容
     set(RC_CONTENT "IDI_ICON1 ICON \"${APP_ICON}\"\n")
-    
+
     # 将 .rc 内容写入文件
     file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/app_icon.rc" "${RC_CONTENT}")
-    
+
     # 设置生成的 .rc 文件路径
     set(ICON_RC_FILE "${CMAKE_CURRENT_BINARY_DIR}/app_icon.rc")
 endif()

@@ -43,10 +43,10 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = D:\SoftWare\Cmake\bin\cmake.exe
+CMAKE_COMMAND = D:\SoftWare\CMake\bin\cmake.exe
 
 # The command to remove a file.
-RM = D:\SoftWare\Cmake\bin\cmake.exe -E rm -f
+RM = D:\SoftWare\CMake\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -75,20 +75,20 @@ CMakeFiles/Migration.dir/main.cpp.obj: CMakeFiles/Migration.dir/flags.make
 CMakeFiles/Migration.dir/main.cpp.obj: D:/Study/C/Migration/main.cpp
 CMakeFiles/Migration.dir/main.cpp.obj: CMakeFiles/Migration.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Study\C\Migration\out\build\Migration\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Migration.dir/main.cpp.obj"
-	D:\SoftWare\C\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Migration.dir/main.cpp.obj -MF CMakeFiles\Migration.dir\main.cpp.obj.d -o CMakeFiles\Migration.dir\main.cpp.obj -c D:\Study\C\Migration\main.cpp
+	D:\SoftWare\CCode\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Migration.dir/main.cpp.obj -MF CMakeFiles\Migration.dir\main.cpp.obj.d -o CMakeFiles\Migration.dir\main.cpp.obj -c D:\Study\C\Migration\main.cpp
 
 CMakeFiles/Migration.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Migration.dir/main.cpp.i"
-	D:\SoftWare\C\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Study\C\Migration\main.cpp > CMakeFiles\Migration.dir\main.cpp.i
+	D:\SoftWare\CCode\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Study\C\Migration\main.cpp > CMakeFiles\Migration.dir\main.cpp.i
 
 CMakeFiles/Migration.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Migration.dir/main.cpp.s"
-	D:\SoftWare\C\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Study\C\Migration\main.cpp -o CMakeFiles\Migration.dir\main.cpp.s
+	D:\SoftWare\CCode\MSYS2\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Study\C\Migration\main.cpp -o CMakeFiles\Migration.dir\main.cpp.s
 
 CMakeFiles/Migration.dir/app_icon.rc.obj: CMakeFiles/Migration.dir/flags.make
 CMakeFiles/Migration.dir/app_icon.rc.obj: app_icon.rc
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Study\C\Migration\out\build\Migration\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building RC object CMakeFiles/Migration.dir/app_icon.rc.obj"
-	D:\SoftWare\C\MSYS2\ucrt64\bin\windres.exe -O coff $(RC_DEFINES) $(RC_INCLUDES) $(RC_FLAGS) D:\Study\C\Migration\out\build\Migration\app_icon.rc CMakeFiles\Migration.dir\app_icon.rc.obj
+	D:\SoftWare\CCode\MSYS2\ucrt64\bin\windres.exe -O coff $(RC_DEFINES) $(RC_INCLUDES) $(RC_FLAGS) D:\Study\C\Migration\out\build\Migration\app_icon.rc CMakeFiles\Migration.dir\app_icon.rc.obj
 
 # Object files for target Migration
 Migration_OBJECTS = \
